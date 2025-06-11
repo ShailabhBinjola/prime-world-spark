@@ -51,20 +51,18 @@ const EnquiryPopup = ({ isOpen, onClose }: EnquiryPopupProps) => {
 
     try {
       // Create WhatsApp message
-      const message = `🎁 Exclusive Offer Enquiry - Prime World City
+      const message = `🎁 Exclusive Offer Enquiry - Pride World City
 
 Name: ${formData.name.trim()}
 Phone: ${formData.phone.trim()}
 
-I'm interested in the exclusive launch offers for Prime World City. Please share details about:
-• Zero Brokerage Fee offer
-• Free Registration & Legal Documentation
+I'm interested in the exclusive launch offers for Pride World City. Please share details about:
 • Current pricing and payment plans
 • Available floor plans
 
 Looking forward to hearing from you soon!`;
       
-      const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/917620658446?text=${encodeURIComponent(message)}`;
       
       // Open WhatsApp in new tab
       const newWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
@@ -135,14 +133,6 @@ Looking forward to hearing from you soon!`;
           <ul className="space-y-2 text-sm">
             <li className="flex items-center">
               <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
-              Zero Brokerage Fee (Save ₹3+ Lakh)
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
-              Free Registration & Legal Documentation
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
               Instant Price Lock (Current Rates)
             </li>
             <li className="flex items-center">
@@ -151,7 +141,7 @@ Looking forward to hearing from you soon!`;
             </li>
             <li className="flex items-center">
               <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
-              80% Home Loan Assistance
+               Home Loan Assistance
             </li>
           </ul>
         </div>
@@ -204,10 +194,10 @@ Looking forward to hearing from you soon!`;
 
         <div className="text-center mt-4">
           <p className="text-xs text-gray-500">
-            ⏰ Offer valid until December 31, 2024
+            ⏰ Early access comes with exclusive benefits   — limited-time interest rates on offer.
           </p>
           <p className="text-xs text-gray-500 mt-1">
-            🔒 Our team will contact you within 10 minutes
+            🔒 Our team will contact you within 30 minutes
           </p>
         </div>
       </div>

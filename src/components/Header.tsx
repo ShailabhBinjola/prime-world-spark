@@ -25,10 +25,10 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-luxury-gradient rounded-full flex items-center justify-center">
-              <span className="text-real-estate-navy font-bold text-lg">T</span>
+              <span className="text-real-estate-navy font-bold text-lg">P</span>
             </div>
             <div>
-              <h1 className="font-playfair font-bold text-xl text-white">TrueView Realty</h1>
+              <h1 className="font-playfair font-bold text-xl text-white">Pride World City</h1>
               <p className="text-real-estate-platinum text-xs">Premium Properties</p>
             </div>
           </div>

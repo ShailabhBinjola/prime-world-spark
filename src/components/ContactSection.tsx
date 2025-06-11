@@ -38,12 +38,12 @@ const ContactSection = () => {
 
     try {
       // Create WhatsApp message
-      const message = `🏠 Prime World City Enquiry
+      const message = `🏠 Pride World City Enquiry
       
 Name: ${formData.name}
 Phone: ${formData.phone}
 ${formData.email ? `Email: ${formData.email}` : ''}
-${formData.message ? `Message: ${formData.message}` : 'Interested in learning more about Prime World City.'}
+${formData.message ? `Message: ${formData.message}` : 'Interested in learning more about Pride World City.'}
 
 Please contact me with details and arrange a site visit.`;
       
@@ -74,7 +74,7 @@ Please contact me with details and arrange a site visit.`;
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="font-playfair text-4xl md:text-5xl font-bold text-real-estate-navy mb-4">
-              Ready to Make <span className="luxury-text-gradient">Prime World City</span> Your Home?
+              Ready to Make <span className="luxury-text-gradient">Pride World City</span> Your Home?
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Get in touch with our expert team for personalized assistance and exclusive offers
@@ -143,7 +143,7 @@ Please contact me with details and arrange a site visit.`;
                   <Textarea
                     id="message"
                     name="message"
-                    placeholder="Any specific requirements or questions about Prime World City?"
+                    placeholder="Any specific requirements or questions about Pride World City?"
                     value={formData.message}
                     onChange={handleInputChange}
                     className="w-full p-4 text-real-estate-navy bg-gray-50 border-2 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold focus:bg-white transition-all duration-300 min-h-[100px] resize-none"
@@ -160,7 +160,7 @@ Please contact me with details and arrange a site visit.`;
               </form>
 
               <p className="text-xs text-gray-500 text-center mt-4">
-                🔒 Your information is secure and will only be used to contact you about Prime World City
+                🔒 Your information is secure and will only be used to contact you about Pride World City
               </p>
             </div>
 
@@ -178,8 +178,8 @@ Please contact me with details and arrange a site visit.`;
                     </div>
                     <div>
                       <p className="text-real-estate-platinum text-sm">Call us directly</p>
-                      <a href="tel:+917721873487" className="font-semibold text-lg hover:text-real-estate-gold transition-colors">
-                        +91 77218 73487
+                      <a href="tel:+917620658446" className="font-semibold text-lg hover:text-real-estate-gold transition-colors">
+                        +91 7620658446
                       </a>
                     </div>
                   </div>
@@ -191,7 +191,7 @@ Please contact me with details and arrange a site visit.`;
                     <div>
                       <p className="text-real-estate-platinum text-sm">Email us</p>
                       <a href="mailto:info@trueviewrealty.com" className="font-semibold hover:text-real-estate-gold transition-colors">
-                        info@trueviewrealty.com
+                        trueviewrealty.in@gmail.com
                       </a>
                     </div>
                   </div>
@@ -202,8 +202,8 @@ Please contact me with details and arrange a site visit.`;
                     </div>
                     <div>
                       <p className="text-real-estate-platinum text-sm">Visit our sales office</p>
-                      <p className="font-semibold">Prime World City Sales Office</p>
-                      <p className="text-sm text-real-estate-platinum">Open Daily: 9 AM - 8 PM</p>
+                      <p className="font-semibold">Pride World City Sales Office</p>
+                      <p className="text-sm text-real-estate-platinum">Open Daily: 10 AM - 8 PM</p>
                     </div>
                   </div>
                 </div>
@@ -217,15 +217,11 @@ Please contact me with details and arrange a site visit.`;
                 <ul className="space-y-3 text-sm">
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
-                    Zero Brokerage Fee (Save ₹3+ Lakh)
+                    Early Bird Pricing (Limited Time)
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
-                    Free Registration & Legal Documentation
-                  </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
-                    80% Home Loan Assistance
+                    Home Loan Assistance
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
@@ -233,12 +229,12 @@ Please contact me with details and arrange a site visit.`;
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
-                    Early Bird Pricing (Limited Time)
+                    Special Gifts for spot bookings
                   </li>
                 </ul>
                 
                 <div className="mt-4 p-3 bg-real-estate-navy/10 rounded-xl">
-                  <p className="text-xs font-semibold">⏰ Offer valid until December 31, 2024</p>
+                  <p className="text-xs font-semibold">⏰ Early access comes with exclusive benefits — limited-time interest rates on offer</p>
                 </div>
               </div>
             </div>

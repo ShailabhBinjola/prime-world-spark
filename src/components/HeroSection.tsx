@@ -11,8 +11,8 @@ const HeroSection = () => {
 
   const downloadBrochure = () => {
     // Create WhatsApp message for brochure request
-    const message = "Hello, I would like to download the Prime World City brochure. Please share the details.";
-    const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
+    const message = "Hello, I would like to download the Pride World City brochure. Please share the details.";
+    const whatsappUrl = `https://wa.me/91?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -30,18 +30,18 @@ const HeroSection = () => {
           {/* Project Status Badge */}
           <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20 mb-8 animate-slide-up">
             <span className="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-            <span className="text-white text-sm font-medium">Under Construction • Prime World City</span>
+            <span className="text-white text-sm font-medium">Under Construction • Pride World City</span>
           </div>
 
           {/* Main Heading */}
           <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
-            Prime World
+            Pride World
             <span className="luxury-text-gradient block">City</span>
           </h1>
 
           {/* Real Project Tagline */}
           <p className="text-xl md:text-2xl text-real-estate-platinum mb-8 font-light animate-slide-up" style={{ animationDelay: '0.4s' }}>
-            Live Smart, Live Prime • Where Luxury Meets Location
+            Live Smart, Live with Pride • Where Luxury Meets Location
           </p>
 
           {/* Real Property Features */}
@@ -56,7 +56,7 @@ const HeroSection = () => {
               <span className="text-white text-sm">⭐ World-Class Amenities</span>
             </div>
             <div className="glass-morphism px-4 py-2 rounded-full">
-              <span className="text-white text-sm">🏡 Ready by 2026</span>
+              <span className="text-white text-sm">🏡 Ready by 2027</span>
             </div>
           </div>
 
@@ -66,21 +66,21 @@ const HeroSection = () => {
               onClick={scrollToContact}
               className="bg-luxury-gradient text-real-estate-navy hover:bg-real-estate-gold text-lg px-8 py-4 rounded-full font-semibold hover-lift"
             >
-              Book Site Visit Today
+              Schedule Site Visit Today
             </Button>
             <Button 
               onClick={downloadBrochure}
               variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-real-estate-navy text-lg px-8 py-4 rounded-full font-semibold hover-lift backdrop-blur-md"
+              className="border-white text-black hover:bg-white hover:text-real-estate-navy text-lg px-8 py-4 rounded-full font-semibold hover-lift backdrop-blur-md"
             >
-              Download Brochure
+              Request for Brochure
             </Button>
           </div>
 
           {/* Real Price Information */}
           <div className="mt-12 animate-slide-up" style={{ animationDelay: '1s' }}>
             <p className="text-real-estate-champagne text-sm mb-2">Starting From</p>
-            <p className="text-3xl md:text-4xl font-bold text-white">₹45 Lakh*</p>
+            <p className="text-3xl md:text-4xl font-bold text-white">₹65 Lakh*</p>
             <p className="text-real-estate-platinum text-sm">*All inclusive | No hidden charges | Terms & Conditions Apply</p>
           </div>
         </div>

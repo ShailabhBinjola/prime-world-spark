@@ -47,14 +47,14 @@ const WhatsAppFloat = () => {
 
     try {
       // Create WhatsApp message
-      const message = `🏠 Quick Enquiry - Prime World City
+      const message = `🏠 Quick Enquiry - Pride World City
 
 Name: ${formData.name.trim()}
 Phone: ${formData.phone.trim()}
 
-I'm interested in Prime World City apartments. Please get in touch with details and pricing information.`;
+I'm interested in Pride World City apartments. Please get in touch with details and pricing information.`;
       
-      const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/917620658446?text=${encodeURIComponent(message)}`;
       
       // Open WhatsApp in new tab
       const newWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');

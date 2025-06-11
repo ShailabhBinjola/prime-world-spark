@@ -2,29 +2,29 @@
 const PricingSection = () => {
   const apartmentTypes = [
     {
-      type: "Smart Studio",
-      price: "₹45 Lakh",
-      size: "1 BHK",
-      area: "580-650 sq.ft",
+      type: "Boston",
+      price: "₹65 Lakh*",
+      size: "2 BHK",
+      area: "673-726 sq.ft",
       features: ["Premium Location", "Modern Kitchen", "Branded Fittings", "Covered Parking"],
       emi: "₹35,000/month",
       popular: false
     },
     {
-      type: "Family Haven",
-      price: "₹75 Lakh",
-      size: "2 BHK",
-      area: "950-1150 sq.ft",
-      features: ["Spacious Balcony", "Master Bedroom", "Premium Amenities", "Garden Facing"],
+      type: "Miami",
+      price: "₹82 Lakh*",
+      size: "2 / 3 / 4.5 BHK",
+      area: "785-2260 sq.ft",
+      features: ["Spacious Balcony", "Spacious Living room", "Premium Amenities", "Garden Facing"],
       emi: "₹58,000/month",
       popular: true
     },
     {
-      type: "Luxury Suites",
-      price: "₹1.2 Cr",
-      size: "3 BHK",
-      area: "1350-1550 sq.ft",
-      features: ["Premium Floors", "City Skyline View", "Designer Interiors", "Private Terrace"],
+      type: "Montreal-Duplex",
+      price: "₹1.07 Cr*",
+      size: "2 / 3 / 4 BHK Duplex",
+      area: "1010-1949 sq.ft",
+      features: ["Premium Floors", "City Skyline View", "Designer Interiors", "Luxury Segment"],
       emi: "₹92,000/month",
       popular: false
     }
@@ -70,7 +70,7 @@ const PricingSection = () => {
                 <h3 className="font-playfair text-2xl font-bold mb-2">{apartment.type}</h3>
                 <div className="text-4xl font-bold mb-1">{apartment.price}</div>
                 <div className={`text-sm mb-2 ${apartment.popular ? 'text-real-estate-navy/70' : 'text-real-estate-gold'}`}>
-                  EMI: {apartment.emi}*
+                  
                 </div>
                 <p className={`text-sm ${apartment.popular ? 'text-real-estate-navy/70' : 'text-real-estate-platinum'}`}>
                   {apartment.size} • {apartment.area}
@@ -90,7 +90,7 @@ const PricingSection = () => {
 
               <button 
                 onClick={() => {
-                  const message = `Hello, I'm interested in the ${apartment.type} (${apartment.size}) at Prime World City. Price: ${apartment.price}. Please share more details and arrange a site visit.`;
+                  const message = `Hello, I'm interested in the ${apartment.type} (${apartment.size}) at Pride World City. Price: ${apartment.price}. Please share more details and arrange a site visit.`;
                   const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
                   window.open(whatsappUrl, '_blank');
                 }}
@@ -100,7 +100,7 @@ const PricingSection = () => {
                     : 'bg-luxury-gradient text-real-estate-navy hover:scale-105'
                 }`}
               >
-                Get Detailed Quote
+                Get Details
               </button>
             </div>
           ))}
@@ -113,10 +113,9 @@ const PricingSection = () => {
               🎉 Launch Offers
             </h3>
             <ul className="space-y-2 text-sm">
-              <li>✓ Zero Brokerage Fee (Save ₹3+ Lakh)</li>
-              <li>✓ Free Registration & Legal Documentation</li>
-              <li>✓ 80% Home Loan Assistance</li>
+              <li>✓ Home Loan Assistance</li>
               <li>✓ Flexible Payment Plans Available</li>
+              <li>✓ Special Gifts for spot bookings</li>
             </ul>
           </div>
           
@@ -125,9 +124,8 @@ const PricingSection = () => {
               💰 Payment Plans
             </h3>
             <ul className="space-y-2 text-sm">
-              <li>• 20% Booking Amount</li>
-              <li>• 30% During Construction</li>
-              <li>• 50% On Possession</li>
+              <li>• 10% Booking Amount</li>
+              <li>• 90% On Possession</li>
               <li>• Easy EMI Options Available</li>
             </ul>
           </div>
@@ -136,7 +134,7 @@ const PricingSection = () => {
         {/* Price Disclaimer */}
         <div className="mt-8 text-center">
           <p className="text-real-estate-platinum text-xs">
-            *EMI calculated at 8.5% interest rate for 20 years. All prices inclusive of taxes. Subject to approval.
+            *Enjoy the most competitive interest rates available. Subject to approval | T&C apply.
           </p>
         </div>
       </div>

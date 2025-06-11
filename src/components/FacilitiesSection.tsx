@@ -1,5 +1,5 @@
 
-import { Waves, Dumbbell, TreePine, Building2, Car, Shield, Wifi, Zap, Utensils, Users } from 'lucide-react';
+import { Waves, Dumbbell, TreePine, Building2, Car, Shield, Wifi , Zap, Utensils, Users } from 'lucide-react';
 
 const FacilitiesSection = () => {
   const premiumAmenities = [
@@ -34,9 +34,9 @@ const FacilitiesSection = () => {
       description: "Gated community with biometric access and security guards"
     },
     {
-      icon: Wifi,
-      title: "High-Speed Internet",
-      description: "Fiber optic connectivity in common areas and pre-wiring in flats"
+      icon: Building2,
+      title: "Luxury mall ",
+      description: "Luxury mall with branded stores and entertainment options"  
     },
     {
       icon: Zap,
@@ -116,14 +116,14 @@ const FacilitiesSection = () => {
               </div>
               <div className="flex flex-col items-center text-center">
                 <span className="text-3xl mb-3">🚌</span>
-                <span className="text-sm">Shuttle Service</span>
+                <span className="text-sm">Gov bus Service</span>
               </div>
             </div>
 
             {/* Amenity Statistics */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-real-estate-gold mb-2">25+</div>
+                <div className="text-3xl font-bold text-real-estate-gold mb-2">40+</div>
                 <div className="text-real-estate-platinum text-sm">Premium Amenities</div>
               </div>
               <div className="text-center">
@@ -132,7 +132,7 @@ const FacilitiesSection = () => {
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-real-estate-gold mb-2">24/7</div>
-                <div className="text-real-estate-platinum text-sm">Concierge Service</div>
+                <div className="text-real-estate-platinum text-sm">Security</div>
               </div>
             </div>
           </div>

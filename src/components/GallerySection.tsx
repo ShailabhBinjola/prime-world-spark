@@ -3,42 +3,42 @@ const GallerySection = () => {
   const propertyImages = [
     {
       id: 1,
-      url: `https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=800&q=80`,
+      url: `/interior.jpg`,
       title: "Luxury Living Spaces",
       description: "Spacious 2 & 3 BHK apartments with premium interiors",
       category: "Interior"
     },
     {
       id: 2,
-      url: `https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&q=80`,
+      url: `architecture.jpg`,
       title: "Modern Architecture",
       description: "Contemporary design with earthquake-resistant structure",
       category: "Architecture"
     },
     {
       id: 3,
-      url: `https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80`,
+      url: `/exterior.jpg`,
       title: "Premium Tower Complex",
-      description: "G+15 floors with high-speed elevators",
+      description: "G+20 floors with high-speed elevators",
       category: "Exterior"
     },
     {
       id: 4,
-      url: `https://images.unsplash.com/photo-1439337153520-7082a56a81f4?w=800&q=80`,
+      url: `/amenities.jpg`,
       title: "Rooftop Amenities",
-      description: "Sky lounge and terrace garden with city views",
+      description: "Premium amenities like a swimming pool, tennis court, and cricket pitch and many more.",
       category: "Amenities"
     },
     {
       id: 5,
-      url: `https://images.unsplash.com/photo-1493397212122-2b85dda8106b?w=800&q=80`,
+      url: `/entrance.jpg`,
       title: "Grand Entrance",
       description: "Impressive lobby with 24/7 security",
       category: "Entrance"
     },
     {
       id: 6,
-      url: `https://images.unsplash.com/photo-1500673922987-e212871fec22?w=800&q=80`,
+      url: `/landscape.jpg`,
       title: "Landscaped Gardens",
       description: "Central courtyard with walking paths and seating",
       category: "Landscape"
@@ -50,7 +50,7 @@ const GallerySection = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="font-playfair text-4xl md:text-5xl font-bold text-real-estate-navy mb-4">
-            Experience <span className="luxury-text-gradient">Prime World City</span>
+            Experience <span className="luxury-text-gradient">Pride World City</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Discover thoughtfully designed spaces that blend modern architecture with premium amenities
@@ -97,15 +97,15 @@ const GallerySection = () => {
         {/* Property Information Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
           <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-real-estate-navy mb-2">200+</div>
+            <div className="text-3xl font-bold text-real-estate-navy mb-2">2000+</div>
             <div className="text-gray-600">Premium Apartments</div>
           </div>
           <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-real-estate-navy mb-2">15</div>
+            <div className="text-3xl font-bold text-real-estate-navy mb-2">20+</div>
             <div className="text-gray-600">Floors</div>
           </div>
           <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
-            <div className="text-3xl font-bold text-real-estate-navy mb-2">5</div>
+            <div className="text-3xl font-bold text-real-estate-navy mb-2">400</div>
             <div className="text-gray-600">Acres Land</div>
           </div>
         </div>
@@ -114,7 +114,7 @@ const GallerySection = () => {
         <div className="text-center mt-12">
           <button 
             onClick={() => {
-              const message = "Hello, I would like to schedule a site visit to Prime World City. Please arrange a convenient time.";
+              const message = "Hello, I would like to schedule a site visit to Pride World City. Please arrange a convenient time.";
               const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
               window.open(whatsappUrl, '_blank');
             }}
