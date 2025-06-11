@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,19 +11,21 @@ const WhatsAppFloat = () => {
     name: '',
     phone: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.phone) {
+    if (!formData.name.trim() || !formData.phone.trim()) {
       toast({
         title: "Missing Information",
         description: "Please fill in both name and phone number.",
@@ -32,29 +34,75 @@ const WhatsAppFloat = () => {
       return;
     }
 
-    // Create WhatsApp message
-    const message = `Hello, I'm interested in Prime World City. My name is ${formData.name}, and my contact number is ${formData.phone}. Please get in touch!`;
-    
-    const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    
-    toast({
-      title: "Message Sent!",
-      description: "We'll contact you shortly.",
-    });
+    if (formData.phone.length < 10) {
+      toast({
+        title: "Invalid Phone Number",
+        description: "Please enter a valid 10-digit phone number.",
+        variant: "destructive"
+      });
+      return;
+    }
 
-    // Reset form and close popup
-    setFormData({ name: '', phone: '' });
+    setIsSubmitting(true);
+
+    try {
+      // Create WhatsApp message
+      const message = `🏠 Quick Enquiry - Prime World City
+
+Name: ${formData.name.trim()}
+Phone: ${formData.phone.trim()}
+
+I'm interested in Prime World City apartments. Please get in touch with details and pricing information.`;
+      
+      const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
+      
+      // Open WhatsApp in new tab
+      const newWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      
+      if (newWindow) {
+        toast({
+          title: "Message Sent!",
+          description: "We'll contact you shortly.",
+        });
+
+        // Reset form and close popup
+        setFormData({ name: '', phone: '' });
+        setIsOpen(false);
+      } else {
+        toast({
+          title: "Popup Blocked",
+          description: "Please allow popups and try again.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [formData, toast]);
+
+  const handleClose = useCallback(() => {
     setIsOpen(false);
-  };
+    setFormData({ name: '', phone: '' });
+  }, []);
+
+  const handleOpen = useCallback(() => {
+    setIsOpen(true);
+  }, []);
 
   return (
     <>
       {/* Floating WhatsApp Button */}
       <div className="fixed bottom-6 right-6 z-50">
         <button
-          onClick={() => setIsOpen(true)}
-          className="w-16 h-16 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center animate-pulse-gold transition-all duration-300 hover:scale-110"
+          onClick={handleOpen}
+          className="w-16 h-16 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-4 focus:ring-green-500/30"
+          aria-label="Open WhatsApp enquiry form"
         >
           <MessageCircle className="w-8 h-8" />
         </button>
@@ -78,44 +126,62 @@ const WhatsAppFloat = () => {
               </div>
               
               <button
-                onClick={() => setIsOpen(false)}
-                className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
+                onClick={handleClose}
+                className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-300"
+                aria-label="Close enquiry form"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleInputChange}
-                className="w-full p-3 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold"
-                required
-              />
+              <div>
+                <label htmlFor="whatsapp-name" className="block text-sm font-medium text-gray-700 mb-1">
+                  Full Name
+                </label>
+                <Input
+                  id="whatsapp-name"
+                  type="text"
+                  name="name"
+                  placeholder="Enter your full name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className="w-full p-3 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold"
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
               
-              <Input
-                type="tel"
-                name="phone"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleInputChange}
-                className="w-full p-3 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold"
-                required
-              />
+              <div>
+                <label htmlFor="whatsapp-phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number
+                </label>
+                <Input
+                  id="whatsapp-phone"
+                  type="tel"
+                  name="phone"
+                  placeholder="Enter 10-digit mobile number"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className="w-full p-3 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold"
+                  required
+                  disabled={isSubmitting}
+                  maxLength={10}
+                  pattern="[0-9]{10}"
+                />
+              </div>
               
               <Button
                 type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-semibold"
+                disabled={isSubmitting}
+                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-semibold transition-all duration-300 disabled:opacity-50"
               >
-                Send Message on WhatsApp
+                {isSubmitting ? 'Sending...' : 'Send Message on WhatsApp'}
               </Button>
             </form>
 
             <p className="text-xs text-gray-500 text-center mt-4">
-              We'll respond within minutes during business hours
+              🔒 We'll respond within minutes during business hours (9 AM - 8 PM)
             </p>
           </div>
         </div>

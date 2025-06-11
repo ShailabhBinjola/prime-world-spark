@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { X, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,19 +15,21 @@ const EnquiryPopup = ({ isOpen, onClose }: EnquiryPopupProps) => {
     name: '',
     phone: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.phone) {
+    if (!formData.name.trim() || !formData.phone.trim()) {
       toast({
         title: "Missing Information",
         description: "Please fill in both name and phone number.",
@@ -36,21 +38,68 @@ const EnquiryPopup = ({ isOpen, onClose }: EnquiryPopupProps) => {
       return;
     }
 
-    // Create WhatsApp message
-    const message = `Hello, I'm interested in Prime World City. My name is ${formData.name}, and my contact number is ${formData.phone}. Please get in touch!`;
-    
-    const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-    
-    toast({
-      title: "Enquiry Sent!",
-      description: "We'll contact you shortly with special offers.",
-    });
+    if (formData.phone.length < 10) {
+      toast({
+        title: "Invalid Phone Number",
+        description: "Please enter a valid 10-digit phone number.",
+        variant: "destructive"
+      });
+      return;
+    }
 
-    // Reset form and close popup
+    setIsSubmitting(true);
+
+    try {
+      // Create WhatsApp message
+      const message = `🎁 Exclusive Offer Enquiry - Prime World City
+
+Name: ${formData.name.trim()}
+Phone: ${formData.phone.trim()}
+
+I'm interested in the exclusive launch offers for Prime World City. Please share details about:
+• Zero Brokerage Fee offer
+• Free Registration & Legal Documentation
+• Current pricing and payment plans
+• Available floor plans
+
+Looking forward to hearing from you soon!`;
+      
+      const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
+      
+      // Open WhatsApp in new tab
+      const newWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+      
+      if (newWindow) {
+        toast({
+          title: "Enquiry Sent!",
+          description: "We'll contact you shortly with exclusive offers.",
+        });
+
+        // Reset form and close popup
+        setFormData({ name: '', phone: '' });
+        onClose();
+      } else {
+        toast({
+          title: "Popup Blocked",
+          description: "Please allow popups and try again.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }, [formData, toast, onClose]);
+
+  const handleClose = useCallback(() => {
     setFormData({ name: '', phone: '' });
     onClose();
-  };
+  }, [onClose]);
 
   if (!isOpen) return null;
 
@@ -71,8 +120,9 @@ const EnquiryPopup = ({ isOpen, onClose }: EnquiryPopupProps) => {
           </div>
           
           <button
-            onClick={onClose}
-            className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors"
+            onClick={handleClose}
+            className="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center hover:bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-300"
+            aria-label="Close offer popup"
           >
             <X className="w-4 h-4" />
           </button>
@@ -83,48 +133,81 @@ const EnquiryPopup = ({ isOpen, onClose }: EnquiryPopupProps) => {
             🎁 Special Launch Benefits
           </h4>
           <ul className="space-y-2 text-sm">
-            <li>✓ Zero Brokerage Fee (Save ₹2+ Lakh)</li>
-            <li>✓ Free Registration & Legal Documentation</li>
-            <li>✓ Instant Price Lock (Current Rates)</li>
-            <li>✓ Priority Floor Selection</li>
+            <li className="flex items-center">
+              <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
+              Zero Brokerage Fee (Save ₹3+ Lakh)
+            </li>
+            <li className="flex items-center">
+              <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
+              Free Registration & Legal Documentation
+            </li>
+            <li className="flex items-center">
+              <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
+              Instant Price Lock (Current Rates)
+            </li>
+            <li className="flex items-center">
+              <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
+              Priority Floor Selection
+            </li>
+            <li className="flex items-center">
+              <span className="w-2 h-2 bg-real-estate-navy rounded-full mr-3"></span>
+              80% Home Loan Assistance
+            </li>
           </ul>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleInputChange}
-            className="w-full p-4 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold"
-            required
-          />
+          <div>
+            <label htmlFor="popup-name" className="block text-sm font-medium text-gray-700 mb-1">
+              Full Name
+            </label>
+            <Input
+              id="popup-name"
+              type="text"
+              name="name"
+              placeholder="Enter your full name"
+              value={formData.name}
+              onChange={handleInputChange}
+              className="w-full p-4 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold"
+              required
+              disabled={isSubmitting}
+            />
+          </div>
           
-          <Input
-            type="tel"
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleInputChange}
-            className="w-full p-4 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold"
-            required
-          />
+          <div>
+            <label htmlFor="popup-phone" className="block text-sm font-medium text-gray-700 mb-1">
+              Phone Number
+            </label>
+            <Input
+              id="popup-phone"
+              type="tel"
+              name="phone"
+              placeholder="Enter 10-digit mobile number"
+              value={formData.phone}
+              onChange={handleInputChange}
+              className="w-full p-4 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold"
+              required
+              disabled={isSubmitting}
+              maxLength={10}
+              pattern="[0-9]{10}"
+            />
+          </div>
           
           <Button
             type="submit"
-            className="w-full bg-real-estate-navy hover:bg-real-estate-navy/90 text-white py-4 rounded-xl font-semibold text-lg"
+            disabled={isSubmitting}
+            className="w-full bg-real-estate-navy hover:bg-real-estate-navy/90 text-white py-4 rounded-xl font-semibold text-lg transition-all duration-300 disabled:opacity-50"
           >
-            Claim Your Exclusive Offer
+            {isSubmitting ? 'Claiming Offer...' : 'Claim Your Exclusive Offer'}
           </Button>
         </form>
 
         <div className="text-center mt-4">
           <p className="text-xs text-gray-500">
-            ⏰ Offer valid only for the next 24 hours
+            ⏰ Offer valid until December 31, 2024
           </p>
           <p className="text-xs text-gray-500 mt-1">
-            Our team will contact you within 10 minutes
+            🔒 Our team will contact you within 10 minutes
           </p>
         </div>
       </div>

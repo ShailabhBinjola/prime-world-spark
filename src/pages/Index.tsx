@@ -11,15 +11,21 @@ import EnquiryPopup from '../components/EnquiryPopup';
 
 const Index = () => {
   const [showEnquiryPopup, setShowEnquiryPopup] = useState(false);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   useEffect(() => {
-    // Auto-trigger enquiry popup every 1 minute
+    // Ensure page is fully loaded before showing any popups
+    setIsPageLoaded(true);
+    
+    // Auto-trigger enquiry popup every 2 minutes (increased from 1 minute to reduce annoyance)
     const interval = setInterval(() => {
-      setShowEnquiryPopup(true);
-    }, 60000); // 60 seconds
+      if (isPageLoaded) {
+        setShowEnquiryPopup(true);
+      }
+    }, 120000); // 2 minutes
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPageLoaded]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -30,10 +36,12 @@ const Index = () => {
       <FacilitiesSection />
       <ContactSection />
       <WhatsAppFloat />
-      <EnquiryPopup 
-        isOpen={showEnquiryPopup} 
-        onClose={() => setShowEnquiryPopup(false)} 
-      />
+      {isPageLoaded && (
+        <EnquiryPopup 
+          isOpen={showEnquiryPopup} 
+          onClose={() => setShowEnquiryPopup(false)} 
+        />
+      )}
     </div>
   );
 };

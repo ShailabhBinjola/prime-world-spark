@@ -1,41 +1,47 @@
 
 const GallerySection = () => {
-  const images = [
+  const propertyImages = [
     {
       id: 1,
       url: `https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=800&q=80`,
-      title: "Luxury Living Room",
-      description: "Spacious and elegantly designed living spaces"
+      title: "Luxury Living Spaces",
+      description: "Spacious 2 & 3 BHK apartments with premium interiors",
+      category: "Interior"
     },
     {
       id: 2,
       url: `https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&q=80`,
       title: "Modern Architecture",
-      description: "Contemporary design with premium finishes"
+      description: "Contemporary design with earthquake-resistant structure",
+      category: "Architecture"
     },
     {
       id: 3,
       url: `https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=800&q=80`,
-      title: "Building Exterior",
-      description: "Striking facade with modern aesthetics"
+      title: "Premium Tower Complex",
+      description: "G+15 floors with high-speed elevators",
+      category: "Exterior"
     },
     {
       id: 4,
       url: `https://images.unsplash.com/photo-1439337153520-7082a56a81f4?w=800&q=80`,
-      title: "Sky Lounge",
-      description: "Panoramic views from premium floors"
+      title: "Rooftop Amenities",
+      description: "Sky lounge and terrace garden with city views",
+      category: "Amenities"
     },
     {
       id: 5,
       url: `https://images.unsplash.com/photo-1493397212122-2b85dda8106b?w=800&q=80`,
-      title: "Architectural Marvel",
-      description: "Award-winning design excellence"
+      title: "Grand Entrance",
+      description: "Impressive lobby with 24/7 security",
+      category: "Entrance"
     },
     {
       id: 6,
       url: `https://images.unsplash.com/photo-1500673922987-e212871fec22?w=800&q=80`,
       title: "Landscaped Gardens",
-      description: "Serene green spaces for relaxation"
+      description: "Central courtyard with walking paths and seating",
+      category: "Landscape"
     }
   ];
 
@@ -47,15 +53,15 @@ const GallerySection = () => {
             Experience <span className="luxury-text-gradient">Prime World City</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Step into a world of luxury and sophistication with our thoughtfully designed spaces
+            Discover thoughtfully designed spaces that blend modern architecture with premium amenities
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {images.map((image, index) => (
+          {propertyImages.map((image, index) => (
             <div 
               key={image.id} 
-              className="group relative overflow-hidden rounded-2xl hover-lift animate-scale-in"
+              className="group relative overflow-hidden rounded-2xl hover-lift animate-scale-in bg-white shadow-lg"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="aspect-[4/3] overflow-hidden">
@@ -63,10 +69,16 @@ const GallerySection = () => {
                   src={image.url} 
                   alt={image.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
                 />
               </div>
               
-              {/* Overlay */}
+              {/* Property Category Badge */}
+              <div className="absolute top-4 left-4 bg-real-estate-navy text-white px-3 py-1 rounded-full text-xs font-semibold">
+                {image.category}
+              </div>
+              
+              {/* Content Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-real-estate-navy/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-6 left-6 right-6 text-white">
                   <h3 className="font-playfair text-xl font-semibold mb-2">{image.title}</h3>
@@ -74,7 +86,7 @@ const GallerySection = () => {
                 </div>
               </div>
 
-              {/* Luxury Badge */}
+              {/* Status Badge */}
               <div className="absolute top-4 right-4 bg-luxury-gradient text-real-estate-navy px-3 py-1 rounded-full text-xs font-semibold">
                 Premium
               </div>
@@ -82,10 +94,33 @@ const GallerySection = () => {
           ))}
         </div>
 
+        {/* Property Information Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+          <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
+            <div className="text-3xl font-bold text-real-estate-navy mb-2">200+</div>
+            <div className="text-gray-600">Premium Apartments</div>
+          </div>
+          <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
+            <div className="text-3xl font-bold text-real-estate-navy mb-2">15</div>
+            <div className="text-gray-600">Floors</div>
+          </div>
+          <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
+            <div className="text-3xl font-bold text-real-estate-navy mb-2">5</div>
+            <div className="text-gray-600">Acres Land</div>
+          </div>
+        </div>
+
         {/* Gallery CTA */}
         <div className="text-center mt-12">
-          <button className="bg-real-estate-navy text-white px-8 py-3 rounded-full font-semibold hover-lift">
-            View Complete Gallery
+          <button 
+            onClick={() => {
+              const message = "Hello, I would like to schedule a site visit to Prime World City. Please arrange a convenient time.";
+              const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
+              window.open(whatsappUrl, '_blank');
+            }}
+            className="bg-real-estate-navy text-white px-8 py-3 rounded-full font-semibold hover-lift"
+          >
+            Schedule Site Visit
           </button>
         </div>
       </div>
