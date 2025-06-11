@@ -1,4 +1,3 @@
-
 import { useState, useCallback } from 'react';
 import { X, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,9 +7,10 @@ import { useToast } from '@/hooks/use-toast';
 interface EnquiryPopupProps {
   isOpen: boolean;
   onClose: () => void;
+  onEnquirySubmit?: () => void;
 }
 
-const EnquiryPopup = ({ isOpen, onClose }: EnquiryPopupProps) => {
+const EnquiryPopup = ({ isOpen, onClose, onEnquirySubmit }: EnquiryPopupProps) => {
   const [formData, setFormData] = useState({
     name: '',
     phone: ''
@@ -92,6 +92,9 @@ Looking forward to hearing from you soon!`;
           description: "We'll contact you shortly with exclusive offers.",
         });
 
+        // Mark enquiry as submitted
+        onEnquirySubmit?.();
+
         // Reset form and close popup
         setFormData({ name: '', phone: '' });
         onClose();
@@ -111,7 +114,7 @@ Looking forward to hearing from you soon!`;
     } finally {
       setIsSubmitting(false);
     }
-  }, [formData, toast, onClose]);
+  }, [formData, toast, onClose, onEnquirySubmit]);
 
   const handleClose = useCallback(() => {
     setFormData({ name: '', phone: '' });

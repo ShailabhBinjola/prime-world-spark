@@ -1,11 +1,14 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 
-const ContactSection = () => {
+interface ContactSectionProps {
+  onEnquirySubmit?: () => void;
+}
+
+const ContactSection = ({ onEnquirySubmit }: ContactSectionProps) => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -82,6 +85,9 @@ Please contact me with details and arrange a site visit.`;
         title: "Enquiry Sent Successfully!",
         description: "Our team will contact you within 10 minutes.",
       });
+
+      // Mark enquiry as submitted
+      onEnquirySubmit?.();
 
       // Reset form
       setFormData({ name: '', phone: '', email: '', message: '' });

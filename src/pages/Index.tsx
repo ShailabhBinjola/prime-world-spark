@@ -8,24 +8,31 @@ import GallerySection from '../components/GallerySection';
 import ContactSection from '../components/ContactSection';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import EnquiryPopup from '../components/EnquiryPopup';
+import { useEnquirySubmission } from '../hooks/useEnquirySubmission';
 
 const Index = () => {
   const [showEnquiryPopup, setShowEnquiryPopup] = useState(false);
   const [isPageLoaded, setIsPageLoaded] = useState(false);
+  const { hasSubmittedEnquiry, markEnquirySubmitted } = useEnquirySubmission();
 
   useEffect(() => {
     // Ensure page is fully loaded before showing any popups
     setIsPageLoaded(true);
     
-    // Auto-trigger enquiry popup every 2 minutes (increased from 1 minute to reduce annoyance)
+    // Auto-trigger enquiry popup every 2 minutes only if no enquiry has been submitted
     const interval = setInterval(() => {
-      if (isPageLoaded) {
+      if (isPageLoaded && !hasSubmittedEnquiry) {
         setShowEnquiryPopup(true);
       }
     }, 120000); // 2 minutes
 
     return () => clearInterval(interval);
-  }, [isPageLoaded]);
+  }, [isPageLoaded, hasSubmittedEnquiry]);
+
+  const handleEnquirySubmit = () => {
+    markEnquirySubmitted();
+    setShowEnquiryPopup(false);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -34,12 +41,13 @@ const Index = () => {
       <GallerySection />
       <PricingSection />
       <FacilitiesSection />
-      <ContactSection />
-      <WhatsAppFloat />
-      {isPageLoaded && (
+      <ContactSection onEnquirySubmit={markEnquirySubmitted} />
+      <WhatsAppFloat onEnquirySubmit={markEnquirySubmitted} />
+      {isPageLoaded && !hasSubmittedEnquiry && (
         <EnquiryPopup 
           isOpen={showEnquiryPopup} 
-          onClose={() => setShowEnquiryPopup(false)} 
+          onClose={() => setShowEnquiryPopup(false)}
+          onEnquirySubmit={handleEnquirySubmit}
         />
       )}
     </div>

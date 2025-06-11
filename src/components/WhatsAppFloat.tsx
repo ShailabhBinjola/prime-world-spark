@@ -1,11 +1,14 @@
-
 import { useState, useCallback } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 
-const WhatsAppFloat = () => {
+interface WhatsAppFloatProps {
+  onEnquirySubmit?: () => void;
+}
+
+const WhatsAppFloat = ({ onEnquirySubmit }: WhatsAppFloatProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -84,6 +87,9 @@ I'm interested in Pride World City apartments. Please get in touch with details 
           description: "We'll contact you shortly.",
         });
 
+        // Mark enquiry as submitted
+        onEnquirySubmit?.();
+
         // Reset form and close popup
         setFormData({ name: '', phone: '' });
         setIsOpen(false);
@@ -103,7 +109,7 @@ I'm interested in Pride World City apartments. Please get in touch with details 
     } finally {
       setIsSubmitting(false);
     }
-  }, [formData, toast]);
+  }, [formData, toast, onEnquirySubmit]);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
