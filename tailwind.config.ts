@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,24 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				'real-estate': {
+					'navy': '#0F1B2B',
+					'gold': '#D4AF37',
+					'platinum': '#E5E4E2',
+					'royal-blue': '#1E3A8A',
+					'champagne': '#F7E7CE',
+					'deep-blue': '#1E40AF'
 				}
+			},
+			fontFamily: {
+				'playfair': ['Playfair Display', 'serif'],
+				'inter': ['Inter', 'sans-serif'],
+			},
+			backgroundImage: {
+				'hero-gradient': 'linear-gradient(135deg, #0F1B2B 0%, #1E40AF 50%, #D4AF37 100%)',
+				'luxury-gradient': 'linear-gradient(45deg, #D4AF37 0%, #F7E7CE 100%)',
+				'glass-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +102,31 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'pulse-gold': {
+					'0%, 100%': { boxShadow: '0 0 20px rgba(212, 175, 55, 0.3)' },
+					'50%': { boxShadow: '0 0 40px rgba(212, 175, 55, 0.6)' }
+				},
+				'slide-up': {
+					'0%': { transform: 'translateY(50px)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'scale-in': {
+					'0%': { transform: 'scale(0.8)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 3s ease-in-out infinite',
+				'pulse-gold': 'pulse-gold 2s ease-in-out infinite',
+				'slide-up': 'slide-up 0.6s ease-out',
+				'scale-in': 'scale-in 0.5s ease-out'
 			}
 		}
 	},
