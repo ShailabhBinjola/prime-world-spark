@@ -15,6 +15,23 @@ const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
+  const sanitizePhoneNumber = (phone: string) => {
+    // Remove all non-numeric characters
+    let cleaned = phone.replace(/\D/g, '');
+    
+    // If it starts with +91 or 91, remove it
+    if (cleaned.startsWith('91') && cleaned.length === 12) {
+      cleaned = cleaned.substring(2);
+    }
+    
+    return cleaned;
+  };
+
+  const validatePhoneNumber = (phone: string) => {
+    const sanitized = sanitizePhoneNumber(phone);
+    return sanitized.length === 10 && /^[6-9]\d{9}$/.test(sanitized);
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -34,6 +51,17 @@ const ContactSection = () => {
       return;
     }
 
+    const sanitizedPhone = sanitizePhoneNumber(formData.phone);
+    
+    if (!validatePhoneNumber(formData.phone)) {
+      toast({
+        title: "Invalid Phone Number",
+        description: "Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -41,13 +69,13 @@ const ContactSection = () => {
       const message = `🏠 Pride World City Enquiry
       
 Name: ${formData.name}
-Phone: ${formData.phone}
+Phone: ${sanitizedPhone}
 ${formData.email ? `Email: ${formData.email}` : ''}
 ${formData.message ? `Message: ${formData.message}` : 'Interested in learning more about Pride World City.'}
 
 Please contact me with details and arrange a site visit.`;
       
-      const whatsappUrl = `https://wa.me/917721873487?text=${encodeURIComponent(message)}`;
+      const whatsappUrl = `https://wa.me/917620658446?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank');
       
       toast({
@@ -118,7 +146,11 @@ Please contact me with details and arrange a site visit.`;
                     onChange={handleInputChange}
                     className="w-full p-4 text-real-estate-navy bg-gray-50 border-2 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold focus:bg-white transition-all duration-300"
                     required
+                    maxLength={13}
                   />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Enter 10-digit Indian mobile number (6/7/8/9 series)
+                  </p>
                 </div>
                 
                 <div>

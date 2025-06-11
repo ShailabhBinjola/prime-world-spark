@@ -18,6 +18,23 @@ const EnquiryPopup = ({ isOpen, onClose }: EnquiryPopupProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
+  const sanitizePhoneNumber = (phone: string) => {
+    // Remove all non-numeric characters
+    let cleaned = phone.replace(/\D/g, '');
+    
+    // If it starts with +91 or 91, remove it
+    if (cleaned.startsWith('91') && cleaned.length === 12) {
+      cleaned = cleaned.substring(2);
+    }
+    
+    return cleaned;
+  };
+
+  const validatePhoneNumber = (phone: string) => {
+    const sanitized = sanitizePhoneNumber(phone);
+    return sanitized.length === 10 && /^[6-9]\d{9}$/.test(sanitized);
+  };
+
   const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -38,10 +55,12 @@ const EnquiryPopup = ({ isOpen, onClose }: EnquiryPopupProps) => {
       return;
     }
 
-    if (formData.phone.length < 10) {
+    const sanitizedPhone = sanitizePhoneNumber(formData.phone);
+    
+    if (!validatePhoneNumber(formData.phone)) {
       toast({
         title: "Invalid Phone Number",
-        description: "Please enter a valid 10-digit phone number.",
+        description: "Please enter a valid 10-digit Indian mobile number starting with 6, 7, 8, or 9.",
         variant: "destructive"
       });
       return;
@@ -54,7 +73,7 @@ const EnquiryPopup = ({ isOpen, onClose }: EnquiryPopupProps) => {
       const message = `🎁 Exclusive Offer Enquiry - Pride World City
 
 Name: ${formData.name.trim()}
-Phone: ${formData.phone.trim()}
+Phone: ${sanitizedPhone}
 
 I'm interested in the exclusive launch offers for Pride World City. Please share details about:
 • Current pricing and payment plans
@@ -110,7 +129,7 @@ Looking forward to hearing from you soon!`;
               <Gift className="w-6 h-6 text-real-estate-navy" />
             </div>
             <div>
-              <h3 className="font-playfair text-2xl font-semibold text-real-estate-navy">
+              <h3 className="font-playfair text-2xl font-semibold text-gray-900">
                 Exclusive Offer!
               </h3>
               <p className="text-sm text-gray-600">Limited time opportunity</p>
@@ -148,7 +167,7 @@ Looking forward to hearing from you soon!`;
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="popup-name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="popup-name" className="block text-sm font-medium text-gray-900 mb-1">
               Full Name
             </label>
             <Input
@@ -158,14 +177,14 @@ Looking forward to hearing from you soon!`;
               placeholder="Enter your full name"
               value={formData.name}
               onChange={handleInputChange}
-              className="w-full p-4 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold"
+              className="w-full p-4 text-gray-900 bg-gray-50 border-gray-300 rounded-xl focus:border-real-estate-gold focus:bg-white focus:ring-2 focus:ring-real-estate-gold/20"
               required
               disabled={isSubmitting}
             />
           </div>
           
           <div>
-            <label htmlFor="popup-phone" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="popup-phone" className="block text-sm font-medium text-gray-900 mb-1">
               Phone Number
             </label>
             <Input
@@ -175,12 +194,14 @@ Looking forward to hearing from you soon!`;
               placeholder="Enter 10-digit mobile number"
               value={formData.phone}
               onChange={handleInputChange}
-              className="w-full p-4 border-real-estate-platinum/50 rounded-xl focus:border-real-estate-gold"
+              className="w-full p-4 text-gray-900 bg-gray-50 border-gray-300 rounded-xl focus:border-real-estate-gold focus:bg-white focus:ring-2 focus:ring-real-estate-gold/20"
               required
               disabled={isSubmitting}
-              maxLength={10}
-              pattern="[0-9]{10}"
+              maxLength={13}
             />
+            <p className="text-xs text-gray-500 mt-1">
+              Enter 10-digit Indian mobile number (6/7/8/9 series)
+            </p>
           </div>
           
           <Button
