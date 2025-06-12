@@ -27,9 +27,10 @@ const GallerySection = () => {
       id: 1,
       images: [
         { url: `/interior.jpg`, alt: "Modern Living Room" },
-        { url: `/interior.jpg`, alt: "Luxury Bedroom" },
-        { url: `/interior.jpg`, alt: "Designer Kitchen" },
-        { url: `/interior.jpg`, alt: "Premium Bathroom" }
+        { url: `/interior1.jpg`, alt: "Luxury Bedroom" },
+        { url: `/interior2.jpg`, alt: "Designer Kitchen" },
+        { url: `/interior3.jpg`, alt: "Premium Bathroom" },
+        { url: `/interior4.jpg`, alt: "Premium Bathroom" }
       ],
       title: "Luxury Living Spaces",
       description: "Spacious 2 & 3 BHK apartments with premium interiors",
@@ -38,7 +39,8 @@ const GallerySection = () => {
     {
       id: 2,
       images: [
-        { url: `architecture.jpg`, alt: "Modern Architecture" }
+        { url: `architecture.jpg`, alt: "Modern Architecture" },
+        { url: `architecture1.jpg`, alt: "Modern Architecture" }
       ],
       title: "Modern Architecture",
       description: "Contemporary design with earthquake-resistant structure",
@@ -47,8 +49,7 @@ const GallerySection = () => {
     {
       id: 3,
       images: [
-        { url: `/exterior.jpg`, alt: "Tower Complex View" },
-        { url: `/exterior.jpg`, alt: "Building Facade" }
+        { url: `/exterior.jpg`, alt: "Tower Complex View" }
       ],
       title: "Premium Tower Complex",
       description: "G+20 floors with high-speed elevators",
@@ -57,7 +58,9 @@ const GallerySection = () => {
     {
       id: 4,
       images: [
-        { url: `/amenities.jpg`, alt: "Rooftop Pool" }
+        { url: `/amenities.jpg`, alt: "Rooftop Pool" },
+        { url: `/amenities1.jpg`, alt: "Rooftop Pool" },
+        { url: `/amenities2.jpg`, alt: "Rooftop Pool" }
       ],
       title: "Rooftop Amenities",
       description: "Premium amenities like a swimming pool, tennis court, and cricket pitch and many more.",
@@ -66,7 +69,8 @@ const GallerySection = () => {
     {
       id: 5,
       images: [
-        { url: `/entrance.jpg`, alt: "Grand Entrance" }
+        { url: `/entrance.jpg`, alt: "Grand Entrance" },
+        { url: `/entrance1.jpg`, alt: "Grand Entrance" }
       ],
       title: "Grand Entrance",
       description: "Impressive lobby with 24/7 security",
