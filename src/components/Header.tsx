@@ -54,16 +54,16 @@ const Header = () => {
               <span className="text-real-estate-navy font-bold text-lg hidden">P</span>
             </div>
             <div>
-              <h1 className="font-playfair font-bold text-xl text-real-estate-navy">Pride World City</h1>
-              <p className="text-real-estate-navy/70 text-xs">Premium Properties by TrueView Realty</p>
+              <h1 className="font-playfair font-bold text-xl text-white drop-shadow-[2px_2px_4px_rgba(0,0,0,0.8)] filter drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(255,255,255,0.3)' }}>Pride World City</h1>
+              <p className="text-white/90 text-xs drop-shadow-[1px_1px_2px_rgba(0,0,0,0.8)]" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>Premium Properties by TrueView Realty</p>
             </div>
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <button onClick={() => scrollToSection('gallery')} className="text-real-estate-navy hover:text-real-estate-gold transition-colors font-medium">Gallery</button>
-            <button onClick={() => scrollToSection('pricing')} className="text-real-estate-navy hover:text-real-estate-gold transition-colors font-medium">Pricing</button>
-            <button onClick={() => scrollToSection('facilities')} className="text-real-estate-navy hover:text-real-estate-gold transition-colors font-medium">Amenities</button>
-            <button onClick={() => scrollToSection('contact')} className="text-real-estate-navy hover:text-real-estate-gold transition-colors font-medium">Contact</button>
+            <button onClick={() => scrollToSection('gallery')} className="text-white hover:text-real-estate-gold transition-colors font-medium drop-shadow-[1px_1px_2px_rgba(0,0,0,0.8)]" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>Gallery</button>
+            <button onClick={() => scrollToSection('pricing')} className="text-white hover:text-real-estate-gold transition-colors font-medium drop-shadow-[1px_1px_2px_rgba(0,0,0,0.8)]" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>Pricing</button>
+            <button onClick={() => scrollToSection('facilities')} className="text-white hover:text-real-estate-gold transition-colors font-medium drop-shadow-[1px_1px_2px_rgba(0,0,0,0.8)]" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>Amenities</button>
+            <button onClick={() => scrollToSection('contact')} className="text-white hover:text-real-estate-gold transition-colors font-medium drop-shadow-[1px_1px_2px_rgba(0,0,0,0.8)]" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>Contact</button>
           </nav>
         </div>
       </div>

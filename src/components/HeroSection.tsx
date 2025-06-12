@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { openWhatsApp, getWhatsAppMessage } from '../config/whatsapp';
 
@@ -44,10 +45,10 @@ const HeroSection = () => {
             <span className="text-white text-sm font-medium">Under Construction • Pride World City</span>
           </div>
 
-          {/* Main Heading */}
-          <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+          {/* Main Heading with proper spacing */}
+          <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 animate-slide-up leading-tight" style={{ animationDelay: '0.2s' }}>
             Pride World
-            <span className="luxury-text-gradient block">City</span>
+            <span className="luxury-text-gradient block mt-2">City</span>
           </h1>
 
           {/* Real Project Tagline */}
