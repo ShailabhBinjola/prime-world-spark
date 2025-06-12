@@ -54,16 +54,16 @@ const Header = () => {
               <span className="text-real-estate-navy font-bold text-lg hidden">P</span>
             </div>
             <div>
-              <h1 className="font-playfair font-bold text-xl text-white">Pride World City</h1>
-              <p className="text-real-estate-platinum text-xs">Premium Properties by TrueView Realty</p>
+              <h1 className="font-playfair font-bold text-xl text-real-estate-navy">Pride World City</h1>
+              <p className="text-real-estate-navy/70 text-xs">Premium Properties by TrueView Realty</p>
             </div>
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <button onClick={() => scrollToSection('gallery')} className="text-white hover:text-real-estate-gold transition-colors">Gallery</button>
-            <button onClick={() => scrollToSection('pricing')} className="text-white hover:text-real-estate-gold transition-colors">Pricing</button>
-            <button onClick={() => scrollToSection('facilities')} className="text-white hover:text-real-estate-gold transition-colors">Amenities</button>
-            <button onClick={() => scrollToSection('contact')} className="text-white hover:text-real-estate-gold transition-colors">Contact</button>
+            <button onClick={() => scrollToSection('gallery')} className="text-real-estate-navy hover:text-real-estate-gold transition-colors font-medium">Gallery</button>
+            <button onClick={() => scrollToSection('pricing')} className="text-real-estate-navy hover:text-real-estate-gold transition-colors font-medium">Pricing</button>
+            <button onClick={() => scrollToSection('facilities')} className="text-real-estate-navy hover:text-real-estate-gold transition-colors font-medium">Amenities</button>
+            <button onClick={() => scrollToSection('contact')} className="text-real-estate-navy hover:text-real-estate-gold transition-colors font-medium">Contact</button>
           </nav>
         </div>
       </div>
