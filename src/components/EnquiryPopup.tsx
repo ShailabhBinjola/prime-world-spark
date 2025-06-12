@@ -3,6 +3,7 @@ import { X, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { openWhatsApp, getWhatsAppMessage } from '../config/whatsapp';
 
 interface EnquiryPopupProps {
   isOpen: boolean;
@@ -19,14 +20,10 @@ const EnquiryPopup = ({ isOpen, onClose, onEnquirySubmit }: EnquiryPopupProps) =
   const { toast } = useToast();
 
   const sanitizePhoneNumber = (phone: string) => {
-    // Remove all non-numeric characters
     let cleaned = phone.replace(/\D/g, '');
-    
-    // If it starts with +91 or 91, remove it
     if (cleaned.startsWith('91') && cleaned.length === 12) {
       cleaned = cleaned.substring(2);
     }
-    
     return cleaned;
   };
 
@@ -69,42 +66,26 @@ const EnquiryPopup = ({ isOpen, onClose, onEnquirySubmit }: EnquiryPopupProps) =
     setIsSubmitting(true);
 
     try {
-      // Create WhatsApp message
-      const message = `🎁 Exclusive Offer Enquiry - Pride World City
+      // Create WhatsApp message with personal details
+      const baseMessage = getWhatsAppMessage('enquiry-popup');
+      const personalizedMessage = `${baseMessage}
 
 Name: ${formData.name.trim()}
 Phone: ${sanitizedPhone}
 
-I'm interested in the exclusive launch offers for Pride World City. Please share details about:
-• Current pricing and payment plans
-• Available floor plans
-
 Looking forward to hearing from you soon!`;
       
-      const whatsappUrl = `https://wa.me/917620658446?text=${encodeURIComponent(message)}`;
+      // Use centralized WhatsApp function
+      openWhatsApp(personalizedMessage);
       
-      // Open WhatsApp in new tab
-      const newWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      
-      if (newWindow) {
-        toast({
-          title: "Enquiry Sent!",
-          description: "We'll contact you shortly with exclusive offers.",
-        });
+      toast({
+        title: "Enquiry Sent!",
+        description: "We'll contact you shortly with exclusive offers.",
+      });
 
-        // Mark enquiry as submitted
-        onEnquirySubmit?.();
-
-        // Reset form and close popup
-        setFormData({ name: '', phone: '' });
-        onClose();
-      } else {
-        toast({
-          title: "Popup Blocked",
-          description: "Please allow popups and try again.",
-          variant: "destructive"
-        });
-      }
+      onEnquirySubmit?.();
+      setFormData({ name: '', phone: '' });
+      onClose();
     } catch (error) {
       toast({
         title: "Error",

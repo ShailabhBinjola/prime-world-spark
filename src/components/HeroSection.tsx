@@ -1,23 +1,34 @@
-
 import { Button } from '@/components/ui/button';
+import { openWhatsApp, getWhatsAppMessage } from '../config/whatsapp';
 
 const HeroSection = () => {
   const scrollToContact = () => {
     const element = document.getElementById('contact');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      // Calculate offset to account for fixed header
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
-  const downloadBrochure = () => {
-    // Create WhatsApp message for brochure request
-    const message = "Hello, I would like to download the Pride World City brochure. Please share the details.";
-    const whatsappUrl = `https://wa.me/91?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+  const handleBrochureRequest = () => {
+    const message = getWhatsAppMessage('hero-brochure');
+    openWhatsApp(message);
+  };
+
+  const handleSiteVisit = () => {
+    const message = getWhatsAppMessage('hero-visit');
+    openWhatsApp(message);
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero-gradient">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero-gradient" style={{ paddingTop: '80px' }}>
       {/* Optimized Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-20 w-32 h-32 bg-real-estate-gold/20 rounded-full blur-xl animate-float"></div>
@@ -63,13 +74,13 @@ const HeroSection = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style={{ animationDelay: '0.8s' }}>
             <Button 
-              onClick={scrollToContact}
+              onClick={handleSiteVisit}
               className="bg-luxury-gradient text-real-estate-navy hover:bg-real-estate-gold text-lg px-8 py-4 rounded-full font-semibold hover-lift"
             >
               Schedule Site Visit Today
             </Button>
             <Button 
-              onClick={downloadBrochure}
+              onClick={handleBrochureRequest}
               variant="outline" 
               className="border-white text-black hover:bg-white hover:text-real-estate-navy text-lg px-8 py-4 rounded-full font-semibold hover-lift backdrop-blur-md"
             >

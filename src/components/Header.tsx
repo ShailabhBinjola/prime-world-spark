@@ -13,24 +13,39 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Calculate offset to account for fixed header
+      const headerOffset = 80; // Height of the fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <header 
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'glass-morphism backdrop-blur-lg' 
+          ? 'glass-morphism backdrop-blur-lg shadow-lg' 
           : 'bg-transparent'
       }`}
+      style={{ height: '80px' }} // Fixed height for consistent spacing
     >
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
+      <div className="container mx-auto px-6 py-4 h-full">
+        <div className="flex items-center justify-between h-full">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-luxury-gradient rounded-full flex items-center justify-center p-1 hover:scale-110 transition-transform duration-300">
               <img 
                 src="/logo.jpg" 
-                alt="TrueView Realty Logo" 
-                className="w-full h-full rounded-full object-cover animate-pulse"
+                alt="Pride World City Logo" 
+                className="w-full h-full rounded-full object-cover"
                 onError={(e) => {
-                  // Fallback to text if logo image fails to load
                   const target = e.target as HTMLImageElement;
                   target.style.display = 'none';
                   target.nextElementSibling?.classList.remove('hidden');
@@ -45,10 +60,10 @@ const Header = () => {
           </div>
           
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#gallery" className="text-white hover:text-real-estate-gold transition-colors">Gallery</a>
-            <a href="#pricing" className="text-white hover:text-real-estate-gold transition-colors">Pricing</a>
-            <a href="#facilities" className="text-white hover:text-real-estate-gold transition-colors">Amenities</a>
-            <a href="#contact" className="text-white hover:text-real-estate-gold transition-colors">Contact</a>
+            <button onClick={() => scrollToSection('gallery')} className="text-white hover:text-real-estate-gold transition-colors">Gallery</button>
+            <button onClick={() => scrollToSection('pricing')} className="text-white hover:text-real-estate-gold transition-colors">Pricing</button>
+            <button onClick={() => scrollToSection('facilities')} className="text-white hover:text-real-estate-gold transition-colors">Amenities</button>
+            <button onClick={() => scrollToSection('contact')} className="text-white hover:text-real-estate-gold transition-colors">Contact</button>
           </nav>
         </div>
       </div>

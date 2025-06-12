@@ -3,6 +3,7 @@ import { MessageCircle, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { openWhatsApp, getWhatsAppMessage } from '../config/whatsapp';
 
 interface WhatsAppFloatProps {
   onEnquirySubmit?: () => void;
@@ -18,14 +19,10 @@ const WhatsAppFloat = ({ onEnquirySubmit }: WhatsAppFloatProps) => {
   const { toast } = useToast();
 
   const sanitizePhoneNumber = (phone: string) => {
-    // Remove all non-numeric characters
     let cleaned = phone.replace(/\D/g, '');
-    
-    // If it starts with +91 or 91, remove it
     if (cleaned.startsWith('91') && cleaned.length === 12) {
       cleaned = cleaned.substring(2);
     }
-    
     return cleaned;
   };
 
@@ -68,38 +65,24 @@ const WhatsAppFloat = ({ onEnquirySubmit }: WhatsAppFloatProps) => {
     setIsSubmitting(true);
 
     try {
-      // Create WhatsApp message
-      const message = `🏠 Quick Enquiry - Pride World City
+      // Create WhatsApp message with personal details
+      const baseMessage = getWhatsAppMessage('whatsapp-float');
+      const personalizedMessage = `${baseMessage}
 
 Name: ${formData.name.trim()}
-Phone: ${sanitizedPhone}
-
-I'm interested in Pride World City apartments. Please get in touch with details and pricing information.`;
+Phone: ${sanitizedPhone}`;
       
-      const whatsappUrl = `https://wa.me/917620658446?text=${encodeURIComponent(message)}`;
+      // Use centralized WhatsApp function
+      openWhatsApp(personalizedMessage);
       
-      // Open WhatsApp in new tab
-      const newWindow = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-      
-      if (newWindow) {
-        toast({
-          title: "Message Sent!",
-          description: "We'll contact you shortly.",
-        });
+      toast({
+        title: "Message Sent!",
+        description: "We'll contact you shortly.",
+      });
 
-        // Mark enquiry as submitted
-        onEnquirySubmit?.();
-
-        // Reset form and close popup
-        setFormData({ name: '', phone: '' });
-        setIsOpen(false);
-      } else {
-        toast({
-          title: "Popup Blocked",
-          description: "Please allow popups and try again.",
-          variant: "destructive"
-        });
-      }
+      onEnquirySubmit?.();
+      setFormData({ name: '', phone: '' });
+      setIsOpen(false);
     } catch (error) {
       toast({
         title: "Error",

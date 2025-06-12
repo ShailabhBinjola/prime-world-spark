@@ -16,15 +16,13 @@ const Index = () => {
   const { hasSubmittedEnquiry, markEnquirySubmitted } = useEnquirySubmission();
 
   useEffect(() => {
-    // Ensure page is fully loaded before showing any popups
     setIsPageLoaded(true);
     
-    // Auto-trigger enquiry popup every 2 minutes only if no enquiry has been submitted
     const interval = setInterval(() => {
       if (isPageLoaded && !hasSubmittedEnquiry) {
         setShowEnquiryPopup(true);
       }
-    }, 120000); // 2 minutes
+    }, 120000);
 
     return () => clearInterval(interval);
   }, [isPageLoaded, hasSubmittedEnquiry]);
@@ -39,9 +37,16 @@ const Index = () => {
       <Header />
       <HeroSection />
       <GallerySection />
-      <PricingSection />
-      <FacilitiesSection />
-      <ContactSection onEnquirySubmit={markEnquirySubmitted} />
+      {/* Add proper spacing for sections */}
+      <div id="pricing" style={{ paddingTop: '80px' }}>
+        <PricingSection />
+      </div>
+      <div id="facilities" style={{ paddingTop: '80px' }}>
+        <FacilitiesSection />
+      </div>
+      <div id="contact" style={{ paddingTop: '80px' }}>
+        <ContactSection onEnquirySubmit={markEnquirySubmitted} />
+      </div>
       <WhatsAppFloat onEnquirySubmit={markEnquirySubmitted} />
       {isPageLoaded && !hasSubmittedEnquiry && (
         <EnquiryPopup 
