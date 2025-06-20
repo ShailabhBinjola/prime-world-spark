@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { openWhatsApp, getWhatsAppMessage } from '../config/whatsapp';
 
@@ -95,13 +94,6 @@ const HeroSection = () => {
             <p className="text-3xl md:text-4xl font-bold text-white">₹65 Lakh*</p>
             <p className="text-real-estate-platinum text-sm">*All inclusive | No hidden charges | Terms & Conditions Apply</p>
           </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
     </section>

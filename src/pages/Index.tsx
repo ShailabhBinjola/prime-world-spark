@@ -22,7 +22,7 @@ const Index = () => {
       if (isPageLoaded && !hasSubmittedEnquiry) {
         setShowEnquiryPopup(true);
       }
-    }, 120000);
+    }, 30000); // Changed from 120000 (2 minutes) to 30000 (30 seconds)
 
     return () => clearInterval(interval);
   }, [isPageLoaded, hasSubmittedEnquiry]);
