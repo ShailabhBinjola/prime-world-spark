@@ -8,6 +8,7 @@ import GallerySection from '../components/GallerySection';
 import ContactSection from '../components/ContactSection';
 import WhatsAppFloat from '../components/WhatsAppFloat';
 import EnquiryPopup from '../components/EnquiryPopup';
+import Footer from '../components/Footer';
 import { useEnquirySubmission } from '../hooks/useEnquirySubmission';
 
 const Index = () => {
@@ -47,6 +48,7 @@ const Index = () => {
       <div id="contact" style={{ paddingTop: '80px' }}>
         <ContactSection onEnquirySubmit={markEnquirySubmitted} />
       </div>
+      <Footer />
       <WhatsAppFloat onEnquirySubmit={markEnquirySubmitted} />
       {isPageLoaded && !hasSubmittedEnquiry && (
         <EnquiryPopup 

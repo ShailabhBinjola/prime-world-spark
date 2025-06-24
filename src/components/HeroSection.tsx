@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { openWhatsApp, getWhatsAppMessage } from '../config/whatsapp';
 
@@ -28,7 +29,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero-gradient" style={{ paddingTop: '80px' }}>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-hero-gradient" style={{ paddingTop: '106px' }}>
       {/* Optimized Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-20 w-32 h-32 bg-real-estate-gold/20 rounded-full blur-xl animate-float"></div>
@@ -47,7 +48,7 @@ const HeroSection = () => {
           {/* Main Heading with proper spacing */}
           <h1 className="font-playfair text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 animate-slide-up leading-tight" style={{ animationDelay: '0.2s' }}>
             Pride World
-            <span className="luxury-text-gradient block mt-2">City</span>
+            <span className="luxury-text-gradient block mt-4">City</span>
           </h1>
 
           {/* Real Project Tagline */}
