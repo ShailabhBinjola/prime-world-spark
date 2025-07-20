@@ -10,6 +10,7 @@ import WhatsAppFloat from '../components/WhatsAppFloat';
 import EnquiryPopup from '../components/EnquiryPopup';
 import Footer from '../components/Footer';
 import { useEnquirySubmission } from '../hooks/useEnquirySubmission';
+import Meta from '../components/Meta';
 
 const Index = () => {
   const [showEnquiryPopup, setShowEnquiryPopup] = useState(false);
@@ -34,30 +35,33 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <HeroSection />
-      <GallerySection />
-      {/* Add proper spacing for sections */}
-      <div id="pricing" style={{ paddingTop: '80px' }}>
-        <PricingSection />
+    <>
+      <Meta title="Prime World Spark - Home" description="Welcome to Prime World Spark. Discover premium amenities, facilities, and more." />
+      <div className="min-h-screen bg-background">
+        <Header />
+        <HeroSection />
+        <GallerySection />
+        {/* Add proper spacing for sections */}
+        <div id="pricing" style={{ paddingTop: '80px' }}>
+          <PricingSection />
+        </div>
+        <div id="facilities" style={{ paddingTop: '80px' }}>
+          <FacilitiesSection />
+        </div>
+        <div id="contact" style={{ paddingTop: '80px' }}>
+          <ContactSection onEnquirySubmit={markEnquirySubmitted} />
+        </div>
+        <Footer />
+        <WhatsAppFloat onEnquirySubmit={markEnquirySubmitted} />
+        {isPageLoaded && !hasSubmittedEnquiry && (
+          <EnquiryPopup 
+            isOpen={showEnquiryPopup} 
+            onClose={() => setShowEnquiryPopup(false)}
+            onEnquirySubmit={handleEnquirySubmit}
+          />
+        )}
       </div>
-      <div id="facilities" style={{ paddingTop: '80px' }}>
-        <FacilitiesSection />
-      </div>
-      <div id="contact" style={{ paddingTop: '80px' }}>
-        <ContactSection onEnquirySubmit={markEnquirySubmitted} />
-      </div>
-      <Footer />
-      <WhatsAppFloat onEnquirySubmit={markEnquirySubmitted} />
-      {isPageLoaded && !hasSubmittedEnquiry && (
-        <EnquiryPopup 
-          isOpen={showEnquiryPopup} 
-          onClose={() => setShowEnquiryPopup(false)}
-          onEnquirySubmit={handleEnquirySubmit}
-        />
-      )}
-    </div>
+    </>
   );
 };
 
